@@ -1,0 +1,1 @@
+console.log("Sistema Web 2026 cargado correctamente.");
