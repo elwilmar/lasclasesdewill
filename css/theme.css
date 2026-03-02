@@ -1,5 +1,222 @@
+/* =========================
+   RESET
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   VARIABLES DE COLOR POR ÁREA
+========================= */
+:root {
+    --tec-base: #1E88E5;
+    --tec-soft: #E3F2FD;
+
+    --etica-base: #E57373;
+    --etica-soft: #FFEBEE;
+
+    --inv-base: #43A047;
+    --inv-soft: #E8F5E9;
+}
+
+/* =========================
+   BODY GENERAL
+========================= */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
+    min-height: 100vh;
     text-align: center;
-    margin-top: 100px;
+    background: #f4f6f9;
+}
+
+/* =========================
+   HERO
+========================= */
+.hero {
+    padding: 90px 20px 50px;
+}
+
+/* TÍTULO PRINCIPAL */
+.logo {
+    font-size: 3.8rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+    background: linear-gradient(
+        90deg,
+        #1E88E5,
+        #43A047,
+        #1E88E5
+    );
+    background-size: 300% 300%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation:
+        gradientMove 6s ease infinite,
+        fadeSlideIn 1.2s ease forwards;
+
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* LEMA */
+.lema {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    color: #666;
+
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeSlideIn 1.4s ease forwards;
+    animation-delay: 0.3s;
+}
+
+/* =========================
+   CONTENEDOR TARJETAS
+========================= */
+.cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    padding: 40px 20px 80px;
+}
+
+/* =========================
+   TARJETAS BASE
+========================= */
+.card {
+    width: 240px;
+    height: 240px;
+    border-radius: 28px;
+    text-decoration: none;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+    /* Animación base */
+    opacity: 0;
+    transform: translateY(25px);
+}
+
+/* Hover elegante */
+.card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 30px 50px rgba(0,0,0,0.25);
+}
+
+/* Icono */
+.icono {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+/* Texto tarjeta */
+.card h2 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.card p {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* =========================
+   COLORES HOME POR ÁREA
+========================= */
+.card-tecnologia {
+    background: var(--tec-base);
+}
+
+.card-etica {
+    background: var(--etica-base);
+}
+
+.card-investigacion {
+    background: var(--inv-base);
+}
+
+/* =========================
+   NIVEL 2 (GRADOS)
+========================= */
+.card-nivel2 {
+    width: 190px;
+    height: 190px;
+    font-size: 1.7rem;
+}
+
+/* =========================
+   FONDOS POR ÁREA
+========================= */
+.area-tecnologia {
+    background: var(--tec-soft);
+}
+
+.area-etica {
+    background: var(--etica-soft);
+}
+
+.area-investigacion {
+    background: var(--inv-soft);
+}
+
+/* =========================
+   HEADER OCULTO EN HOME
+========================= */
+.home .main-header {
+    display: none;
+}
+
+/* =========================
+   ANIMACIONES TARJETAS
+========================= */
+
+/* Home: más marcada */
+.home .card {
+    animation: cardFadeUp 0.9s ease forwards;
+}
+
+/* Internas: más sutil */
+body:not(.home) .card {
+    animation: cardFadeUp 0.6s ease forwards;
+}
+
+/* Secuencia */
+.cards-container .card:nth-child(1) { animation-delay: 0.4s; }
+.cards-container .card:nth-child(2) { animation-delay: 0.55s; }
+.cards-container .card:nth-child(3) { animation-delay: 0.7s; }
+
+/* =========================
+   KEYFRAMES
+========================= */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes cardFadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
