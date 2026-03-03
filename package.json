@@ -1,0 +1,21 @@
+{
+  "name": "lasclasesdewill",
+  "version": "1.0.0",
+  "description": "Sistema web modular 2026",
+  "main": "build.js",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elwilmar/lasclasesdewill.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/elwilmar/lasclasesdewill/issues"
+  },
+  "homepage": "https://github.com/elwilmar/lasclasesdewill#readme"
+}
