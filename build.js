@@ -5,7 +5,7 @@ const ROOT = __dirname;
 const DIST = path.join(ROOT, "docs");
 
 /* ================================
-   UTILIDAD: COPIAR CARPETAS
+   COPIAR CARPETAS
 ================================ */
 
 function copyFolder(src, dest) {
@@ -26,18 +26,15 @@ function copyFolder(src, dest) {
 }
 
 /* ================================
-   UTILIDAD: CALCULAR PROFUNDIDAD
+   CALCULAR PROFUNDIDAD
 ================================ */
 
 function getRelativePrefix(filePath) {
   const relativePath = path.relative(DIST, filePath);
   const segments = relativePath.split(path.sep);
-
-  // restamos 1 porque el último segmento es el archivo
   const depth = segments.length - 1;
 
   if (depth === 0) return "./";
-
   return "../".repeat(depth);
 }
 
@@ -54,19 +51,24 @@ function processHTML(dir) {
     } else if (file.endsWith(".html")) {
 
       let content = fs.readFileSync(fullPath, "utf8");
-
       const prefix = getRelativePrefix(fullPath);
 
-      // Reemplazar ruta absoluta de CSS
+      // CSS
       content = content.replace(
         /href="\/css\/theme.css"/g,
         `href="${prefix}css/theme.css"`
       );
 
-      // Reemplazar ruta absoluta de JS si existiera
+      // JS
       content = content.replace(
         /src="\/js\/main.js"/g,
         `src="${prefix}js/main.js"`
+      );
+
+      // HEADER HOME LINKS
+      content = content.replace(
+        /href="\/index.html"/g,
+        `href="${prefix}index.html"`
       );
 
       fs.writeFileSync(fullPath, content, "utf8");
@@ -75,22 +77,17 @@ function processHTML(dir) {
 }
 
 /* ================================
-   BUILD PRINCIPAL
+   BUILD
 ================================ */
 
-// Limpiar dist completamente
 fs.rmSync(DIST, { recursive: true, force: true });
-
-// Crear dist vacío
 fs.mkdirSync(DIST);
 
-// Copiar estructura necesaria
 copyFolder(path.join(ROOT, "css"), path.join(DIST, "css"));
 copyFolder(path.join(ROOT, "js"), path.join(DIST, "js"));
 copyFolder(path.join(ROOT, "components"), path.join(DIST, "components"));
 copyFolder(path.join(ROOT, "areas"), path.join(DIST, "areas"));
 
-// Copiar index principal si existe
 if (fs.existsSync(path.join(ROOT, "index.html"))) {
   fs.copyFileSync(
     path.join(ROOT, "index.html"),
@@ -98,7 +95,6 @@ if (fs.existsSync(path.join(ROOT, "index.html"))) {
   );
 }
 
-// Procesar HTML dentro de dist
 processHTML(DIST);
 
-console.log("Build compilado limpio y estructuralmente correcto.");
+console.log("Build final limpio y estable.");
